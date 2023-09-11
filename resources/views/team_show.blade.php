@@ -3,7 +3,9 @@
 @section('content')
     
     <p>{{ $team->id }} {{ $team->title }} {{ $team->team_year }}</p>
-
-    <button type="submit" class="btn btn-primary">OK</button>
+    <p>Состав:</p>
+    @foreach($players as $player)
+    <p>{{ $player->last_name }} {{ $player->first_name }} {{ $player->birthday }} {{ $player->position }}</p>
+    @endforeach
 
 @endsection

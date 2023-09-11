@@ -21,3 +21,5 @@ Route::get('/teams/{team}', 'TeamController@show')->name('teams.show');
 
 //PLAYER'S ROUTES
 Route::get('/players', 'PlayerController@index')->name('players.index');
+Route::get('/players/create', 'PlayerController@create')->name('players.create');
+Route::post('/players', 'PlayerController@store')->name('players.store');
