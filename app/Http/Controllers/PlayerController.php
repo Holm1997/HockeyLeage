@@ -50,4 +50,8 @@ class PlayerController extends Controller
 
         return redirect()->route("teams.show", $team_id);
     }
+
+    public function show(Player $player) {
+        return view('player_show', compact('player'));
+    }
 }
