@@ -13,12 +13,12 @@ class PlayerController extends Controller
     public function index() {
         $players = Player::all();
 
-        return view('players', compact('players'));
+        return view('player/index', compact('players'));
     }
 
     public function create() {
         $teams = Team::all();
-        return view('player_create', compact('teams'));
+        return view('player/create', compact('teams'));
     }
 
     public function store() {
@@ -52,6 +52,44 @@ class PlayerController extends Controller
     }
 
     public function show(Player $player) {
-        return view('player_show', compact('player'));
+        return view('player/show', compact('player'));
+    }
+
+    public function edit(Player $player) {
+        $team = $player->teams->first();
+
+        return view('player/edit', compact('player', 'team'));
+
+    }
+
+    public function update(Player $player) {
+        $data = request()->validate([
+            'last_name' => 'string',
+            'first_name' => 'string',
+            'birthday' => 'string',
+            'position' => 'string',
+            'team_id' => 'string',
+        ]);
+
+        $team_id = (int)$data['team_id'];
+        unset($data['team_id']);
+
+        $player->update($data);
+
+        return redirect()->route("teams.show", $team_id);
+
+    }
+
+    public function destroy(Player $player) {
+
+        $team = $player->teams->first();
+        $playerTeam = PlayerTeam::where([
+            'player_id' => $player->id,
+            'team_id' => $team->id,
+        ]);
+        $playerTeam->delete();
+        $player->delete();
+        return redirect()->route("teams.show", $team->id);
+
     }
 }

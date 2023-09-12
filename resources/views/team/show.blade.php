@@ -4,6 +4,12 @@
     
     <h1>{{ $team->title }} {{ $team->team_year }}</h1>
     <p>Состав:</p>
+    <form action="{{ route('teams.delete', $team->id) }}" method="post">
+        @csrf
+        @method('delete')
+        <button type="submit" class="btn btn-primary">Delete team</button>
+    </form>
+    <a href="{{ route('players.create') }}">Add a new player</a>
     <div class="card border-white mb-3 shadow bg-body-tertiary rounded">
     <ul class="list-group list-group-flush">
     @foreach($players as $player)

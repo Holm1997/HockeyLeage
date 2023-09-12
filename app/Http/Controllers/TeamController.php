@@ -11,11 +11,11 @@ class TeamController extends Controller
 {
     public function index() {
         $teams = Team::all();
-        return view('teams', compact('teams'));
+        return view('team/index', compact('teams'));
     }
 
     public function create() {
-        return view('team_create');
+        return view('team/create');
 
     }
 
@@ -31,7 +31,23 @@ class TeamController extends Controller
 
     public function show(Team $team) {
         $players = $team->players;
-        return view('team_show', compact('team', 'players'));
+        return view('team/show', compact('team', 'players'));
+
+    }
+
+    public function edit(Team $team) {
+            $team->delete();
+            return redirect()->route('teams.index');
+    }
+
+    public function update() {
+        $team = Team::find();
+
+    }
+
+    public function destroy(team $team) {
+        $team->delete();
+        return redirect()->route('teams.index');
 
     }
 }
