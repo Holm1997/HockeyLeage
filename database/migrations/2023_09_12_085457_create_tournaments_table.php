@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('tournaments', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->year('teams_year');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->unsignedBigInteger('season_id');
+            $table->index('season_id', 'tournament_season_idx');
+            $table->foreign('season_id', 'tournament_season_fk')->on('seasons')->references('id');
+
             $table->timestamps();
         });
     }

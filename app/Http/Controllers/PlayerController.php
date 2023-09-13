@@ -11,12 +11,14 @@ use App\Models\PlayerTeam;
 class PlayerController extends Controller
 {
     public function index() {
+        
         $players = Player::all();
 
         return view('player/index', compact('players'));
     }
 
     public function create() {
+        
         $teams = Team::all();
         return view('player/create', compact('teams'));
     }
@@ -52,10 +54,12 @@ class PlayerController extends Controller
     }
 
     public function show(Player $player) {
+        
         return view('player/show', compact('player'));
     }
 
     public function edit(Player $player) {
+        
         $team = $player->teams->first();
 
         return view('player/edit', compact('player', 'team'));

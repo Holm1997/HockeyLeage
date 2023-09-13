@@ -15,10 +15,14 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
+      <div class="navbar-nav me-auto">
+        <a class="nav-link active" aria-current="page" href="{{ route('tournaments.index') }}">Турниры</a>
         <a class="nav-link active" aria-current="page" href="{{ route('teams.index') }}">Команды</a>
         <a class="nav-link" href="{{ route('players.index') }}">Игроки</a>
       </div>
+      <div class="col-auto ms-auto">
+      
+      <div>
     </div>
   </div>
 </nav>

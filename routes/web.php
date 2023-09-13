@@ -12,14 +12,38 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
+
+//TOURNAMENT'S ROUTES
+
+Route::group(['namespace' => 'Tournament'], function () {
+    Route::get('/tournaments', 'IndexController')->name('tournaments.index');
+    Route::get('/tournaments/{tournament}', 'ShowController')->name('tournaments.show');
+});
+
+//MATCH'S ROUTES
+
+Route::group(['namespace' => 'Match'], function () {
+    Route::get('/tournaments/{tournament}/matches', 'IndexController')->name('matches.index');
+    Route::get('{tournament}/match/create', 'CreateController')->name('matches.create');
+    Route::post('/match', 'StoreController')->name('matches.store');
+    Route::get('/matches/{match}', 'ShowController')->name('matches.show');
+});
+
+
 //TEAM'S ROUTES
-Route::get('/teams', 'TeamController@index')->name('teams.index');
-Route::get('/teams/create', 'TeamController@create')->name('teams.create');
-Route::post('/teams', 'TeamController@store')->name('teams.store');
-Route::get('/teams/{team}', 'TeamController@show')->name('teams.show');
-Route::get('/teams/{team}/edit', 'TeamController@edit')->name('teams.edit');
-Route::post('/teams/{team}', 'TeamController@update')->name('teams.update');
-Route::delete('/teams/{team}', 'TeamController@destroy')->name('teams.delete');
+Route::group(['namespace' => 'Team'], function(){
+    Route::get('/teams', 'IndexController')->name('teams.index');
+    Route::get('/teams/create', 'CreateController')->name('teams.create');
+    Route::post('/teams', 'StoreController')->name('teams.store');
+    Route::get('/teams/{team}', 'ShowController')->name('teams.show');
+    Route::get('/teams/{team}/edit', 'EditController')->name('teams.edit');
+    Route::post('/teams/{team}', 'UpdateController')->name('teams.update');
+    Route::delete('/teams/{team}', 'DestroyController')->name('teams.delete');
+});
+
+
 
 
 //PLAYER'S ROUTES
