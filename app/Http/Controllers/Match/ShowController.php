@@ -22,22 +22,37 @@ class ShowController extends Controller
         $match['guest_name'] = $guest->title . ' ' . $guest->team_year;
 
         $players = MatchPlayer::where('match_id', $match->id)->get();
-
-        foreach ($players as $player) {
-
-            $player_info = Player::where('id', $player->player_id)->first();
-
-            if ($player->team_id == $home->id) {
-
-                $home_players[$player->id] = $player_info; 
-
-            } elseif ($player->team_id == $guest->id) {
-
-                $guest_players[$player->id] = $player_info;
-                
-            }
-        }
         
-        return view('match/show', compact('match', 'home_players', 'guest_players'));
+        if (count($players) != 0) {
+
+            foreach ($players as $player) {
+
+                $player_info = Player::where('id', $player->player_id)->first();
+
+                if ($player->team_id == $home->id) {
+
+                    $home_players[$player->id] = $player_info; 
+
+                } elseif ($player->team_id == $guest->id) {
+
+                    $guest_players[$player->id] = $player_info;
+
+                }
+            }
+        
+
+            if ($home_players and $guest_players) {
+        
+                return view('match.show', compact('match', 'home_players', 'guest_players'));
+
+            } else{
+
+                return view('match.show', compact('match'));
+            }
+
+        } else {
+            
+            return view('match.show', compact('match'));
+        }
     }
 }

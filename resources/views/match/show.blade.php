@@ -40,9 +40,11 @@
 
 <a href="{{ route('matches.edit', $match->id) }}">Edit match info</a>
 
+
 <div class="row">
 
   <div class="col-auto">
+  @if (isset($home_players))
     <table class="table table-sm">
       <thead class="table-dark">
         <tr class="text-center">
@@ -63,9 +65,11 @@
         @endforeach
       </tbody>
     </table>
+    @endif
   </div>
 
   <div class="col-auto ms-auto">
+  @if (isset($guest_players))
     <table class="table table-sm">
       <thead class="table-dark">
         <tr>
@@ -86,6 +90,7 @@
         @endforeach
       </tbody>
     </table>
+    @endif
   </div>
 
 </div>

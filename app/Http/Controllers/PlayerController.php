@@ -25,6 +25,7 @@ class PlayerController extends Controller
 
     public function store() {
 
+        
         $data = request()->validate([
             'last_name' => 'string',
             'first_name' => 'string',
@@ -50,7 +51,14 @@ class PlayerController extends Controller
             'team_id' => $team_id,
         ]);
 
-        return redirect()->route("teams.show", $team_id);
+        if ($_POST['match_edit']) {
+
+            return redirect()->route("matches.edit", $_POST['match_edit']);
+
+        } else {
+
+            return redirect()->route("teams.show", $team_id);
+        }
     }
 
     public function show(Player $player) {
