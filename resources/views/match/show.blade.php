@@ -40,7 +40,55 @@
 
 <a href="{{ route('matches.edit', $match->id) }}">Edit match info</a>
 
+<div class="row">
 
+  <div class="col-auto">
+    <table class="table table-sm">
+      <thead class="table-dark">
+        <tr class="text-center">
+          <th scope="col">#</th>
+          <th scope="col">Ф.И.</th>
+          <th scope="col">Д.Р.</th>
+          <th scope="col">Поз.</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach ($home_players as $pl)
+        <tr>
+          <td scope="row" >{{ $pl->id }}</td>
+          <td>{{ $pl->last_name }} {{ $pl->first_name }}</td>
+          <td>{{ $pl->birthday }}</td>
+          <td>{{ $pl->position }}</td>  
+        </tr>
+        @endforeach
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-auto ms-auto">
+    <table class="table table-sm">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Ф.И.</th>
+          <th scope="col">Д.Р.</th>
+          <th scope="col">Поз.</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach ($guest_players as $pl)
+        <tr>
+          <td scope="row">{{ $pl->id }}</td>
+          <td>{{ $pl->last_name }} {{ $pl->first_name }}</td>
+          <td>{{ $pl->birthday }}</td>
+          <td>{{ $pl->position }}</td>  
+        </tr>
+        @endforeach
+      </tbody>
+    </table>
+  </div>
+
+</div>
 
 
 

@@ -8,6 +8,8 @@ use App\Models\TournamentMatches;
 use App\Http\Controllers\Controller;
 use App\Models\Season;
 use App\Models\Team;
+use App\Models\MatchPlayer;
+use App\Models\Player;
 
 class ShowController extends Controller
 {
@@ -19,8 +21,23 @@ class ShowController extends Controller
         $match['home_name'] = $home->title . ' ' . $home->team_year;
         $match['guest_name'] = $guest->title . ' ' . $guest->team_year;
 
-        //dd($match);
+        $players = MatchPlayer::where('match_id', $match->id)->get();
+
+        foreach ($players as $player) {
+
+            $player_info = Player::where('id', $player->player_id)->first();
+
+            if ($player->team_id == $home->id) {
+
+                $home_players[$player->id] = $player_info; 
+
+            } elseif ($player->team_id == $guest->id) {
+
+                $guest_players[$player->id] = $player_info;
+                
+            }
+        }
         
-        return view('match/show', compact('match'));
+        return view('match/show', compact('match', 'home_players', 'guest_players'));
     }
 }
