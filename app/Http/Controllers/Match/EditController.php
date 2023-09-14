@@ -8,8 +8,9 @@ use App\Models\TournamentMatches;
 use App\Http\Controllers\Controller;
 use App\Models\Season;
 use App\Models\Team;
+use App\Models\Player;
 
-class ShowController extends Controller
+class EditController extends Controller
 {
     public function __invoke(TournamentMatches $match)
     {   
@@ -19,8 +20,9 @@ class ShowController extends Controller
         $match['home_name'] = $home->title . ' ' . $home->team_year;
         $match['guest_name'] = $guest->title . ' ' . $guest->team_year;
 
-        //dd($match);
+        $home_players = $home->players;
+        $guest_players = $guest->players;
         
-        return view('match/show', compact('match'));
+        return view('match.edit', compact('match', 'home_players', 'guest_players'));
     }
 }

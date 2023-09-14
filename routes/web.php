@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//TEST
 
+Route::get('/test', 'TestController@index')->name('test.index');
 
 //TOURNAMENT'S ROUTES
 
@@ -29,6 +31,8 @@ Route::group(['namespace' => 'Match'], function () {
     Route::get('{tournament}/match/create', 'CreateController')->name('matches.create');
     Route::post('/match', 'StoreController')->name('matches.store');
     Route::get('/matches/{match}', 'ShowController')->name('matches.show');
+    Route::get('/matches/{match}/edit', 'EditController')->name('matches.edit');
+    Route::patch('/matches/{match}', 'UpdateController')->name('matches.update');
 });
 
 

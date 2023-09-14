@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Season;
 use App\Models\Teams;
 
-class StoreController extends Controller
+class UpdateController extends Controller
 {
     public function __invoke()
     {   
